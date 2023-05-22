@@ -11,17 +11,22 @@ class User(AbstractUser):
     Вход через почту и пароль.
     """
     email = models.EmailField(
-        'Email', max_length=settings.EMAIL_MAX_LENGTH, unique=True)
+        'Email',
+        max_length=settings.EMAIL_MAX_LENGTH,
+        unique=True)
     first_name = models.CharField(
-        'Имя', max_length=settings.USER_MAX_LENGTH,
-        validators=[validate_real_name], blank=False)
+        'Имя',
+        max_length=settings.USER_MAX_LENGTH,
+        validators=[validate_real_name],
+        blank=False)
     phone_number = models.CharField(
         'Номер телефона',
         validators=[phone_number_regex],
         max_length=16,
         unique=True)
     password = models.CharField(
-        'Пароль', max_length=settings.USER_MAX_LENGTH)
+        'Пароль',
+        max_length=settings.USER_MAX_LENGTH)
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username', 'first_name']
 
