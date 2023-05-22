@@ -21,3 +21,10 @@ class Rating(models.Model):
         verbose_name='Оценка пользователя',
         validators=[validate_rating],
         blank=False)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstrains(
+                fields=['user', 'product'],
+                name='one_usercomment_per_product')
+        ]
