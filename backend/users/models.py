@@ -1,13 +1,14 @@
 from django.conf import settings
 from django.contrib.auth.models import AbstractUser
 
-from validators import phone_number_regex, validate_real_name
+from .validators import phone_number_regex, validate_real_name
 from django.db import models
 
 
 class User(AbstractUser):
     """
-    Вход почта и пароль
+    Модель для регистрации и авторизации пользователя на сайте.
+    Вход через почту и пароль.
     """
     email = models.EmailField(
         'Email', max_length=settings.EMAIL_MAX_LENGTH, unique=True)
@@ -15,6 +16,7 @@ class User(AbstractUser):
         'Имя', max_length=settings.USER_MAX_LENGTH,
         validators=[validate_real_name], blank=False)
     phone_number = models.CharField(
+        'Номер телефона',
         validators=[phone_number_regex],
         max_length=16,
         unique=True)
